@@ -52,7 +52,7 @@ class App
         $this->router->addMiddleware($middleware);
     }
 
-    public function add(string $middleware)
+    public function middleware(string $middleware)
     {
         $this->router->addRouteMiddleware($middleware);
     }

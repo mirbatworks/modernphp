@@ -13,16 +13,16 @@ use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 
 function route(App $app)
 {
-    $app->get('/', [HomeController::class, 'home'])->add(AuthRequiredMiddleware::class);
+    $app->get('/', [HomeController::class, 'home'])->middleware(AuthRequiredMiddleware::class);
     $app->get('/about', [AboutController::class, 'about']);
-    $app->get('/register', [AuthController::class, 'index'])->add(GuestOnlyMiddleware::class);
-    $app->post('/register', [AuthController::class, 'register'])->add(GuestOnlyMiddleware::class);
-    $app->get('/login', [AuthController::class, 'loginView'])->add(GuestOnlyMiddleware::class);
-    $app->post('/login', [AuthController::class, 'login'])->add(GuestOnlyMiddleware::class);
-    $app->get('/logout', [AuthController::class, 'logout'])->add(AuthRequiredMiddleware::class);
-    $app->get('/transaction', [TransactionController::class, 'createView'])->add(AuthRequiredMiddleware::class);
-    $app->post('/transaction', [TransactionController::class, 'create'])->add(AuthRequiredMiddleware::class);
-    $app->get('/transaction/{transaction}', [TransactionController::class, 'editView']);
-    $app->post('/transaction/{transaction}', [TransactionController::class, 'edit']);
-    $app->delete('/transaction/{transaction}', [TransactionController::class, 'delete']);
+    $app->get('/register', [AuthController::class, 'index'])->middleware(GuestOnlyMiddleware::class);
+    $app->post('/register', [AuthController::class, 'register'])->middleware(GuestOnlyMiddleware::class);
+    $app->get('/login', [AuthController::class, 'loginView'])->middleware(GuestOnlyMiddleware::class);
+    $app->post('/login', [AuthController::class, 'login'])->middleware(GuestOnlyMiddleware::class);
+    $app->get('/logout', [AuthController::class, 'logout'])->middleware(AuthRequiredMiddleware::class);
+    $app->get('/transaction', [TransactionController::class, 'createView'])->middleware(AuthRequiredMiddleware::class);
+    $app->post('/transaction', [TransactionController::class, 'create'])->middleware(AuthRequiredMiddleware::class);
+    $app->get('/transaction/{transaction}', [TransactionController::class, 'editView'])->middleware(AuthRequiredMiddleware::class);
+    $app->post('/transaction/{transaction}', [TransactionController::class, 'edit'])->middleware(AuthRequiredMiddleware::class);
+    $app->delete('/transaction/{transaction}', [TransactionController::class, 'delete'])->middleware(AuthRequiredMiddleware::class);
 }
