@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Framework\Http;
+
 function dd(mixed $value)
 {
     echo '<pre>';
@@ -16,6 +20,6 @@ function escape(mixed $value): string
 function redirectTo(string $path)
 {
     header("Location: {$path}");
-    http_response_code(302);
+    http_response_code(Http::REDIRECT_STATUS_CODE);
     exit;
 }

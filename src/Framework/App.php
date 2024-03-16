@@ -52,8 +52,14 @@ class App
         $this->router->addMiddleware($middleware);
     }
 
+    // add method in tutorial I call middleware
     public function middleware(string $middleware)
     {
         $this->router->addRouteMiddleware($middleware);
+    }
+
+    public function setErrorHandler(array $controller)
+    {
+        $this->router->setErrorHandler($controller);
     }
 }
